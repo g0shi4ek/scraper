@@ -5,7 +5,6 @@ import (
 	"golang.org/x/net/html"
 	"log"
 	"net/http"
-	"os"
 	"strings"
 )
 
@@ -51,7 +50,21 @@ func crawl(url string, chFinish chan bool, chLinks chan string) {
 
 func main() {
 	found := make(map[string]bool)
-	urlLinks := os.Args[1:] // из командной строки 1 тк название файла
+	/*reader := bufio.NewReader(os.Stdin)
+	fmt.Println("Введите ссылки, по одной на строке. Введите пустую строку для завершения ввода:")
+
+	urlLinks := []string{}
+	for {
+		input, _ := reader.ReadString('\n')
+		input = input[:len(input)-1] // Удаляем символ новой строки
+
+		if input == "" {
+			break // если строка пустая
+		}
+		urlLinks = append(urlLinks, input)
+	}*/
+	var urlLinks = []string{"https://education.yandex.ru/journal/chto-takoe-github", "https://ru.wikipedia.org/wiki/GitHub"}
+
 	c := 0
 	// каналы
 	chLinks := make(chan string)
